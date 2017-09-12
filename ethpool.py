@@ -21,9 +21,9 @@ methods = [
 SECRET = "CHANGETHIS"
 # адрес веб интерфейса должен совпадать с указаным в 
 # /usr/local/lib/python2.7/dist-packages/flask/app.py
-SERVER_NAME = "192.168.10.244:5000"
+SERVER_NAME = "172.16.0.3:80"
 # адрес пула для подключения майнеров
-SERVER_POOL = "localhost:3000"
+SERVER_POOL = "172.16.16.11:3000"
 # базы данных
 DBSHARE_FILE = "ethshares.db"
 DBPAYOUT_FILE = "ethpayout.db"
@@ -50,7 +50,7 @@ croundlock = Lock ()
 def node_request (command, args = []):
 	payload = { "method": command, "params": args, "jsonrpc": "2.0", "id": 0 }
 	try:
-		return requests.post('http://localhost:8545', data=json.dumps(payload), headers={'content-type': 'application/json'}).json()['result']
+		return requests.post('http://172.16.0.7:8545', data=json.dumps(payload), headers={'content-type': 'application/json'}).json()['result']
 	except:
 		return None
 
@@ -68,7 +68,7 @@ def index():
 	accounts = {}
 	totshare = 0
 	reward = BLOCK_REWARD - FEE
-	c = EthJsonRpc('localhost', 8545)
+	c = EthJsonRpc('172.16.0.7', 8545)
 	posts = c.eth_accounts()
 	conn = sqlite3.connect(DBSHARE_FILE)
 	db = conn.cursor()
@@ -80,7 +80,7 @@ def index():
 	conn.commit ()
 	conn.close ()
 	# запрос хэшрейтинга пула и количества блоков сети
-	c = EthJsonRpc('localhost', 8545)
+	c = EthJsonRpc('172.16.0.7', 8545)
 	Hashrate = c.eth_hashrate()
 	Blocks = c.eth_blockNumber()
 	return render_template('index.html', price=price, priceUSD=priceUSD, Blocks=Blocks, accounts=accounts, Hashrate=Hashrate, totshare=totshare, cround=cround, server=SERVER_POOL)
@@ -118,7 +118,7 @@ def credits ():
 	accounts = {}
 	totshare = 0
 	worker = {}
-	c = EthJsonRpc('localhost', 8545)
+	c = EthJsonRpc('172.16.0.7', 8545)
 	posts = c.eth_accounts()
 	conn = sqlite3.connect(DBSHARE_FILE)
 	db = conn.cursor()
@@ -149,7 +149,7 @@ def miner ():
 	accounts = {}
 	totshare = 0
 	worker = {}
-	c = EthJsonRpc('localhost', 8545)
+	c = EthJsonRpc('172.16.0.7', 8545)
 	posts = c.eth_accounts()
 	conn = sqlite3.connect(DBSHARE_FILE)
 	db = conn.cursor()
