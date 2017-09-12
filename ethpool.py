@@ -16,8 +16,6 @@ methods = [
 	'eth_accounts',
 	'eth_blockNumber',
 ]
-import poloniex
-
 
 # Начальные параметры
 SECRET = "CHANGETHIS"
@@ -35,9 +33,7 @@ BLOCK_REWARD = 5.00
 FEE = 0.2
 # адрес кошелька пула
 COINBASE = "0x88059a92c6a5777e015b432b11120abc26ae8bfe"
-polo = poloniex.Poloniex()
-# время запроса курса валют с polonex
-polo.timeout = 2
+
 # включение отладки в консоли
 DEBUG = True
 
@@ -66,15 +62,9 @@ def node_request (command, args = []):
 # СДЕЛАТЬ ВЫВОД ОСТАВШЕГОСЯ ВРЕМЕНИ ДО ОБНОВЛЕНИЯ DAG
 def index():
 	# price курс BTC_ETH
-	ticker = polo.api('returnTicker')
-	allprice = (ticker['BTC_ETH'])
-	price1 = allprice['last']
-	price = price1[0:6]
+
 	# priceUSD курс USDT_ETH
-	ticker2 = polo.api('returnTicker')
-	allprice2 = (ticker2['USDT_ETH'])
-        price2 = allprice2['last']
-	priceUSD = price2[0:5]
+
 	accounts = {}
 	totshare = 0
 	reward = BLOCK_REWARD - FEE
