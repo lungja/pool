@@ -110,7 +110,7 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/miner/{miner}/{difficulty}/{worker}", handleMiner)
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe(":5082", nil))
+	log.Fatal(http.ListenAndServe(":3000", nil))
 }
 
 func handleMiner(rw http.ResponseWriter, req *http.Request) {
@@ -206,11 +206,11 @@ func handleMiner(rw http.ResponseWriter, req *http.Request) {
 				logInfo.Println("###########################################################################")
 				logInfo.Println("################################Block found################################")
 				logInfo.Println("###########################################################################")
-				http.PostForm("http://192.168.10.244:5000/foundblock", url.Values{})
+				http.PostForm("http://172.16.0.3:5000/foundblock", url.Values{})
 			}
 
 			logInfo.Println("Miner", miner, "Worker", worker, "found valid share (Diff:", minerAdjustedDifficulty, "Mix:", mixDigest, "Hash:", hashNoNonce, "Nonce:", nonce, ")")
-			http.PostForm("http://192.168.10.244:5000/submit", url.Values{"secret": {secret}, "mixdigest": {mixDigest}, "miner": {miner}, "diff": {strconv.FormatInt(minerAdjustedDifficulty, 10)}, "worker": {worker}})
+			http.PostForm("http://172.16.0.3:5000/submit", url.Values{"secret": {secret}, "mixdigest": {mixDigest}, "miner": {miner}, "diff": {strconv.FormatInt(minerAdjustedDifficulty, 10)}, "worker": {worker}})
 		} else {
 			logError.Println("Miner", miner, "provided invalid share")
 			fmt.Fprint(rw, getErrorResponse("Provided PoW solution is invalid!"))
