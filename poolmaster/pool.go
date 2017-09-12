@@ -353,7 +353,7 @@ func callArray(method string, params []interface{}) (*ResponseArray, error) {
 
 
 func callBool(method string, params []interface{}) (*ResponseBool, error) {
-	url := "http://172.16.0.7:5000"
+	url := "http://172.16.0.7:8545"
 	jsonReq := &Request{
 		Id:      1,
 		Jsonrpc: "2.0",
@@ -394,7 +394,7 @@ func callBool(method string, params []interface{}) (*ResponseBool, error) {
 }
 
 func callJSON(method string, params []interface{}) (*ResponseJSON, error) {
-	url := "http://172.16.0.7:5000"
+	url := "http://172.16.0.7:8545"
 	jsonReq := &Request{
 		Id:      1,
 		Jsonrpc: "2.0",
