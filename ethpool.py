@@ -83,7 +83,7 @@ def index():
 	c = EthJsonRpc('172.16.0.7', 8545)
 	Hashrate = c.eth_hashrate()
 	Blocks = c.eth_blockNumber()
-	return render_template('index.html', price=price, priceUSD=priceUSD, Blocks=Blocks, accounts=accounts, Hashrate=Hashrate, totshare=totshare, cround=cround, server=SERVER_POOL)
+	return render_template('index.html', Blocks=Blocks, accounts=accounts, Hashrate=Hashrate, totshare=totshare, cround=cround, server=SERVER_POOL)
 
 # маршрут блоки возвращает blocks.html
 @app.route("/blocks")
