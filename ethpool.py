@@ -25,7 +25,7 @@ SECRET = "CHANGETHIS"
 # /usr/local/lib/python2.7/dist-packages/flask/app.py
 SERVER_NAME = "192.168.10.244:5000"
 # адрес пула для подключения майнеров
-SERVER_POOL = "localhost:5082"
+SERVER_POOL = "localhost:3000"
 # базы данных
 DBSHARE_FILE = "ethshares.db"
 DBPAYOUT_FILE = "ethpayout.db"
